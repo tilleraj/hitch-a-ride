@@ -1,0 +1,5 @@
+{
+  "users": "userInfo",
+  "rides": "rideInfo",
+  "rideUsers": "rideUserInfo"
+}
