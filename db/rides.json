@@ -1,0 +1,50 @@
+{
+  "ride01asdfqwerty12345": {
+    "driverId": "user01asdfqwerty12345",
+    "isLyftUber": false,
+    "origin": "Fairfield Inn",
+    "destination": "venue",
+    "departureTime": "5:00pm",
+    "openSeats": 4
+  },
+  "ride02asdfqwerty12345": {
+    "driverId": "user02asdfqwerty12345",
+    "isLyftUber": false,
+    "origin": "Double Tree",
+    "destination": "venue",
+    "departureTime": "5:30pm",
+    "openSeats": 4
+  },
+  "ride03asdfqwerty12345": {
+    "driverId": "user03asdfqwerty12345",
+    "isLyftUber": true,
+    "origin": "Courtyard",
+    "destination": "venue",
+    "departureTime": "5:45pm",
+    "openSeats": 3
+  },
+  "ride04asdfqwerty12345": {
+    "driverId": "user01asdfqwerty12345",
+    "isLyftUber": false,
+    "origin": "venue",
+    "destination": "Fairfield Inn",
+    "departureTime": "10:00pm",
+    "openSeats": 4
+  },
+  "ride05asdfqwerty12345": {
+    "driverId": "user02asdfqwerty12345",
+    "isLyftUber": false,
+    "origin": "venue",
+    "destination": "Double Tree",
+    "departureTime": "10:30pm",
+    "openSeats": 4
+  },
+  "ride06asdfqwerty12345": {
+    "driverId": "user03asdfqwerty12345",
+    "isLyftUber": true,
+    "origin": "venue",
+    "destination": "Courtyard",
+    "departureTime": "10:45pm",
+    "openSeats": 3
+  }
+}

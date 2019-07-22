@@ -1,0 +1,74 @@
+{
+  "rideUser01asdfqwerty12345": {
+    "uid": "user01asdfqwerty12345",
+    "rideId": "ride01asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": true
+  },
+  "rideUser02asdfqwerty12345": {
+    "uid": "user02asdfqwerty12345",
+    "rideId": "ride02asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": true
+  },
+  "rideUser03asdfqwerty12345": {
+    "uid": "user03asdfqwerty12345",
+    "rideId": "ride03asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": true
+  },
+  "rideUser04asdfqwerty12345": {
+    "uid": "user01asdfqwerty12345",
+    "rideId": "ride04asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": true
+  },
+  "rideUser05asdfqwerty12345": {
+    "uid": "user02asdfqwerty12345",
+    "rideId": "ride05asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": true
+  },
+  "rideUser06asdfqwerty12345": {
+    "uid": "user03asdfqwerty12345",
+    "rideId": "ride06asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": true
+  },
+  "rideUser07asdfqwerty12345": {
+    "uid": "user04asdfqwerty12345",
+    "rideId": "ride01asdfqwerty12345",
+    "isRequested": true,
+    "isAccepted": true
+  },
+  "rideUser08asdfqwerty12345": {
+    "uid": "user04asdfqwerty12345",
+    "rideId": "ride04asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": true
+  },
+  "rideUser09asdfqwerty12345": {
+    "uid": "user05asdfqwerty12345",
+    "rideId": "ride02asdfqwerty12345",
+    "isRequested": true,
+    "isAccepted": true
+  },
+  "rideUser10asdfqwerty12345": {
+    "uid": "user05asdfqwerty12345",
+    "rideId": "ride05asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": true
+  },
+  "rideUser11asdfqwerty12345": {
+    "uid": "user06asdfqwerty12345",
+    "rideId": "ride03asdfqwerty12345",
+    "isRequested": true,
+    "isAccepted": false
+  },
+  "rideUser12asdfqwerty12345": {
+    "uid": "user06asdfqwerty12345",
+    "rideId": "ride06asdfqwerty12345",
+    "isRequested": false,
+    "isAccepted": false
+  }
+}
