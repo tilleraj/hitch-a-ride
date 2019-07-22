@@ -1,16 +1,15 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-// import orderShapes from '../../helpers/propz/orderShapes';
+import rideShape from '../../helpers/props/rideShape';
 import RideRow from '../RideRow/RideRow';
 
 import './Rides.scss';
 
 class Rides extends React.Component {
-  // static propTypes = {
-  //   orders: PropTypes.arrayOf(orderShapes.orderShape),
-  //   deleteOrder: PropTypes.func.isRequired,
-  // }
+  static propTypes = {
+    rides: PropTypes.arrayOf(rideShape.rideShape),
+  }
 
   render() {
     const rideComponents = this.props.rides.map(ride => (
@@ -22,7 +21,7 @@ class Rides extends React.Component {
       />
     ));
     return (
-      <div className="Rides">
+      <div className="Rides col">
         <h2>Rides</h2>
         <table className="table">
           <thead>
