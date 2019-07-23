@@ -1,8 +1,11 @@
 import React from 'react';
 // import moment from 'moment';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import rideShape from '../../helpers/props/rideShape';
+
+import './RideRow.scss';
 
 class RideRow extends React.Component {
   static propTypes = {
@@ -11,6 +14,8 @@ class RideRow extends React.Component {
 
   render() {
     const { ride } = this.props;
+    // const editLink = `/edit/${ride.id}`;
+    const singleLink = `/rides/${ride.id}`;
     return (
       <tr>
         <td>{ride.id}</td>
@@ -20,6 +25,7 @@ class RideRow extends React.Component {
         <td>{ride.destination}</td>
         <td>{ride.departureTime}</td>
         <td>{ride.openSeats}</td>
+        <td><Link className="btn btn-success" to={singleLink}>View</Link></td>
       </tr>
     );
   }
