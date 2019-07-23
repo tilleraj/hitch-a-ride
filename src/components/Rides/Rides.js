@@ -33,6 +33,7 @@ class Rides extends React.Component {
               <th scope="col">Destination</th>
               <th scope="col">Departure Time</th>
               <th scope="col">Open Seats</th>
+              <th scope="col">View</th>
             </tr>
           </thead>
           <tbody>
