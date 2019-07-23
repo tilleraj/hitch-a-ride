@@ -44,7 +44,7 @@ class EditRide extends React.Component {
     e.preventDefault();
     // const saveMe = { ...this.state.newRide };
     // const rideId = this.props.match.params.id;
-    // ridesData.putScat(saveMe, rideId)
+    // ridesData.putRide(saveMe, rideId)
     //   .then(() => this.props.history.push('/home'))
     //   .catch(error => console.error('unable to save', error));
   }
@@ -53,17 +53,17 @@ class EditRide extends React.Component {
     const { newRide } = this.state;
     return (
       <div className="NewRide">
-        <h2>Edit Scat</h2>
+        <h2>Edit Ride</h2>
         <form onSubmit={this.formSubmit}>
           <div className="form-group">
-            <label htmlFor="departureTime">Departure Time</label>
+            <label htmlFor="origin">Origin</label>
             <input
               type="text"
               className="form-control"
-              id="departureTime"
-              placeholder="Sample 12"
-              value={newRide.departureTime}
-              onChange={this.departureTimeChange}
+              id="origin"
+              placeholder="12g"
+              value={newRide.origin}
+              onChange={this.originChange}
             />
           </div>
           <div className="form-group">
@@ -78,14 +78,14 @@ class EditRide extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="origin">Origin</label>
+            <label htmlFor="departureTime">Departure Time</label>
             <input
               type="text"
               className="form-control"
-              id="origin"
-              placeholder="12g"
-              value={newRide.origin}
-              onChange={this.originChange}
+              id="departureTime"
+              placeholder="Sample 12"
+              value={newRide.departureTime}
+              onChange={this.departureTimeChange}
             />
           </div>
           <div className="form-group">
