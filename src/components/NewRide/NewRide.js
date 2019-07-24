@@ -31,7 +31,6 @@ class NewRide extends React.Component {
     const tempRide = { ...this.state.newRide };
     if (name === 'openSeats') {
       tempRide[name] = Number(e.target.value);
-      console.error(e.target.value);
     } else {
       tempRide[name] = e.target.value;
     }
@@ -71,7 +70,7 @@ class NewRide extends React.Component {
             <Label for="origin">Origin</Label>
             <Input
               id="origin"
-              placeholder="12g"
+              placeholder="ex: Venue, Double Tree, etc."
               value={newRide.origin}
               onChange={this.originChange}
             />
@@ -80,7 +79,7 @@ class NewRide extends React.Component {
             <Label for="destination">Destination</Label>
             <Input
               id="destination"
-              placeholder="Brown"
+              placeholder="ex: Double Tree, Venue, etc."
               value={newRide.destination}
               onChange={this.destinationChange}
             />
@@ -89,7 +88,7 @@ class NewRide extends React.Component {
             <Label for="departureTime">Departure Time</Label>
             <Input
               id="departureTime"
-              placeholder="Sample 12"
+              placeholder="17:15"
               type="time"
               value={newRide.departureTime}
               onChange={this.departureTimeChange}
@@ -97,8 +96,8 @@ class NewRide extends React.Component {
           </FormGroup>
           <FormGroup>
             <ButtonGroup id="lyftUberButtonGroup">
-              <Button color="primary" onClick={() => this.lyftUberChange(true)} active={newRide.isLyftUber === true}>Is a Lyft/Uber</Button>
-              <Button color="primary" onClick={() => this.lyftUberChange(false)} active={newRide.isLyftUber === false}>Is not a Lyft/Uber</Button>
+              <Button outline color="info" onClick={() => this.lyftUberChange(true)} active={newRide.isLyftUber === true}>Is a Lyft/Uber</Button>
+              <Button outline color="info" onClick={() => this.lyftUberChange(false)} active={newRide.isLyftUber === false}>Not a Lyft/Uber</Button>
             </ButtonGroup>
           </FormGroup>
           <FormGroup>
@@ -111,7 +110,8 @@ class NewRide extends React.Component {
               onChange={this.openSeatsChange}
             />
           </FormGroup>
-          <Button type="submit" color="primary">Create Ride</Button>
+          <Button type="submit" color="primary" className="mr-4">Create Ride</Button>
+          <Button type="button" color="warning" onClick={() => this.props.history.push(`/rides/${this.props.match.params.id}`)}>Cancel Ride</Button>
         </Form>
       </div>
     );

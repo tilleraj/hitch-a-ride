@@ -58,7 +58,7 @@ class SingleRide extends React.Component {
             </tr>
           </tbody>
         </table>
-        <Link className="btn btn-primary" to={editLink}>Edit</Link>
+        <Link className="btn btn-warning" to={editLink}>Edit</Link>
         {/* <button className="btn btn-outline-danger" onClick={this.deleteRide}>Delete</button> */}
       </div>
     );
