@@ -20,7 +20,7 @@ class RideRow extends React.Component {
       <tr>
         <td>{ride.id}</td>
         <td>{ride.driverId}</td>
-        <td>{ride.isLyftUber.toString()}</td>
+        <td>{ride.isLyftUber ? 'Yes' : 'No'}</td>
         <td>{ride.origin}</td>
         <td>{ride.destination}</td>
         <td>{ride.departureTime}</td>

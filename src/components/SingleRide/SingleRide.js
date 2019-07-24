@@ -46,7 +46,7 @@ class SingleRide extends React.Component {
             </tr>
             <tr>
               <th scope='row'><strong>Lyft/Uber?</strong></th>
-              <td>{ride.isLyftUber}</td>
+              <td>{ride.isLyftUber ? 'Yes' : 'No'}</td>
             </tr>
             <tr>
               <th scope='row'><strong>Open Seats</strong></th>
