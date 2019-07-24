@@ -1,4 +1,12 @@
 import React from 'react';
+import {
+  Button,
+  ButtonGroup,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -20,13 +28,21 @@ class NewRide extends React.Component {
   }
 
   formFieldStringState = (name, e) => {
-    console.error('e.target.value', e.target.value);
     const tempRide = { ...this.state.newRide };
-    tempRide[name] = e.target.value;
+    if (name === 'openSeats') {
+      tempRide[name] = Number(e.target.value);
+      console.error(e.target.value);
+    } else {
+      tempRide[name] = e.target.value;
+    }
     this.setState({ newRide: tempRide });
   }
 
-  isLyftUberChange = e => this.formFieldStringState('isLyftUber', e);
+  lyftUberChange(isLyftUber) {
+    const tempRide = { ...this.state.newRide };
+    tempRide.isLyftUber = isLyftUber;
+    this.setState({ newRide: tempRide });
+  }
 
   originChange = e => this.formFieldStringState('origin', e);
 
@@ -48,65 +64,55 @@ class NewRide extends React.Component {
   render() {
     const { newRide } = this.state;
     return (
-      <div className="NewRide">
+      <div className="NewRide col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <h2>New Ride</h2>
-        <form onSubmit={this.formSubmit}>
-          <div className="form-group">
-            <label htmlFor="origin">Origin</label>
-            <input
-              type="text"
-              className="form-control"
+        <Form onSubmit={this.formSubmit}>
+          <FormGroup>
+            <Label for="origin">Origin</Label>
+            <Input
               id="origin"
-              placeholder="Venue, Double Tree, etc."
+              placeholder="12g"
               value={newRide.origin}
               onChange={this.originChange}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="destination">Destination</label>
-            <input
-              type="text"
-              className="form-control"
+          </FormGroup>
+          <FormGroup>
+            <Label for="destination">Destination</Label>
+            <Input
               id="destination"
-              placeholder="Double Tree, Venue, etc."
+              placeholder="Brown"
               value={newRide.destination}
               onChange={this.destinationChange}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="departureTime">Departure Time</label>
-            <input
-              type="text"
-              className="form-control"
+          </FormGroup>
+          <FormGroup>
+            <Label for="departureTime">Departure Time</Label>
+            <Input
               id="departureTime"
-              placeholder="5:00pm"
+              placeholder="Sample 12"
+              type="time"
               value={newRide.departureTime}
               onChange={this.departureTimeChange}
             />
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="isLyftUber"
-              // value={newRide.isLyftUber}
-              // checked={!!newRide.isLyftUber}
-              onChange={this.isLyftUberChange} />
-            <label className="form-check-label" htmlFor="isLyftUber">Is a Lyft/Uber</label>
-          </div>
-          <div className="form-group">
-            <label htmlFor="openSeats">Open Seats</label>
-            <input
-              type="text"
-              className="form-control"
+          </FormGroup>
+          <FormGroup>
+            <ButtonGroup id="lyftUberButtonGroup">
+              <Button color="primary" onClick={() => this.lyftUberChange(true)} active={newRide.isLyftUber === true}>Is a Lyft/Uber</Button>
+              <Button color="primary" onClick={() => this.lyftUberChange(false)} active={newRide.isLyftUber === false}>Is not a Lyft/Uber</Button>
+            </ButtonGroup>
+          </FormGroup>
+          <FormGroup>
+            <Label for="openSeats">Open Seats</Label>
+            <Input
               id="openSeats"
-              placeholder="4"
+              placeholder="3"
+              type="number"
               value={newRide.openSeats}
               onChange={this.openSeatsChange}
             />
-          </div>
-          <button type="submit" className="btn btn-primary">Create Ride</button>
-        </form>
+          </FormGroup>
+          <Button type="submit" color="primary">Create Ride</Button>
+        </Form>
       </div>
     );
   }

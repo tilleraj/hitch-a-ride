@@ -28,7 +28,7 @@ class SingleRide extends React.Component {
     const { ride } = this.state;
     const editLink = `/edit/${this.props.match.params.id}`;
     return (
-      <div className="SingleRide">
+      <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <h2>{this.props.match.params.id}</h2>
         <table className="table">
           <tbody>

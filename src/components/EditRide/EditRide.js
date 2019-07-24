@@ -1,5 +1,12 @@
 import React from 'react';
-
+import {
+  Button,
+  ButtonGroup,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from 'reactstrap';
 import ridesData from '../../helpers/data/ridesData';
 import './EditRide.scss';
 
@@ -14,23 +21,32 @@ const defaultRide = {
 
 class EditRide extends React.Component {
   state = {
-    newRide: defaultRide,
+    editRide: defaultRide,
   }
 
   componentDidMount() {
     const rideId = this.props.match.params.id;
     ridesData.getSingleRide(rideId)
-      .then(ridePromise => this.setState({ newRide: ridePromise.data }))
+      .then(ridePromise => this.setState({ editRide: ridePromise.data }))
       .catch(error => console.error('could not find single ride', error));
   }
 
   formFieldStringState = (name, e) => {
-    const tempRide = { ...this.state.newRide };
-    tempRide[name] = e.target.value;
-    this.setState({ newRide: tempRide });
+    const tempRide = { ...this.state.editRide };
+    if (name === 'openSeats') {
+      tempRide[name] = Number(e.target.value);
+      console.error(e.target.value);
+    } else {
+      tempRide[name] = e.target.value;
+    }
+    this.setState({ editRide: tempRide });
   }
 
-  isLyftUberChange = e => this.formFieldStringState('isLyftUber', e);
+  lyftUberChange(isLyftUber) {
+    const tempRide = { ...this.state.editRide };
+    tempRide.isLyftUber = isLyftUber;
+    this.setState({ editRide: tempRide });
+  }
 
   originChange = e => this.formFieldStringState('origin', e);
 
@@ -40,78 +56,59 @@ class EditRide extends React.Component {
 
   openSeatsChange = e => this.formFieldStringState('openSeats', e);
 
-  formSubmit = (e) => {
-    e.preventDefault();
-    // const saveMe = { ...this.state.newRide };
-    // const rideId = this.props.match.params.id;
-    // ridesData.putRide(saveMe, rideId)
-    //   .then(() => this.props.history.push('/home'))
-    //   .catch(error => console.error('unable to save', error));
-  }
 
   render() {
-    const { newRide } = this.state;
+    const { editRide } = this.state;
     return (
-      <div className="NewRide">
+      <div className="EditRide col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <h2>Edit Ride</h2>
-        <form onSubmit={this.formSubmit}>
-          <div className="form-group">
-            <label htmlFor="origin">Origin</label>
-            <input
-              type="text"
-              className="form-control"
+        <Form onSubmit={this.formSubmit}>
+          <FormGroup>
+            <Label for="origin">Origin</Label>
+            <Input
               id="origin"
               placeholder="12g"
-              value={newRide.origin}
+              value={editRide.origin}
               onChange={this.originChange}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="destination">Destination</label>
-            <input
-              type="text"
-              className="form-control"
+          </FormGroup>
+          <FormGroup>
+            <Label for="destination">Destination</Label>
+            <Input
               id="destination"
               placeholder="Brown"
-              value={newRide.destination}
+              value={editRide.destination}
               onChange={this.destinationChange}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="departureTime">Departure Time</label>
-            <input
-              type="text"
-              className="form-control"
+          </FormGroup>
+          <FormGroup>
+            <Label for="departureTime">Departure Time</Label>
+            <Input
               id="departureTime"
               placeholder="Sample 12"
-              value={newRide.departureTime}
+              type="time"
+              value={editRide.departureTime}
               onChange={this.departureTimeChange}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="isLyftUber">isLyftUber</label>
-            <input
-              type="text"
-              className="form-control"
-              id="isLyftUber"
-              placeholder="The Moon"
-              value={newRide.isLyftUber}
-              onChange={this.isLyftUberChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="openSeats">Open Seats</label>
-            <input
-              type="text"
-              className="form-control"
+          </FormGroup>
+          <FormGroup>
+            <ButtonGroup id="lyftUberButtonGroup">
+              <Button color="primary" onClick={() => this.lyftUberChange(true)} active={editRide.isLyftUber === true}>Is a Lyft/Uber</Button>
+              <Button color="primary" onClick={() => this.lyftUberChange(false)} active={editRide.isLyftUber === false}>Is not a Lyft/Uber</Button>
+            </ButtonGroup>
+          </FormGroup>
+          <FormGroup>
+            <Label for="openSeats">Open Seats</Label>
+            <Input
               id="openSeats"
-              placeholder="Moose"
-              value={newRide.openSeats}
+              placeholder="3"
+              type="number"
+              value={editRide.openSeats}
               onChange={this.openSeatsChange}
             />
-          </div>
-          <button type="submit" className="btn btn-primary">Update Ride</button>
-        </form>
+          </FormGroup>
+          <Button type="submit" color="primary">Update Ride</Button>
+        </Form>
       </div>
     );
   }
