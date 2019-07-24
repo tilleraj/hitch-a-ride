@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -15,7 +16,7 @@ class Auth extends React.Component {
     return (
       <div className="Auth">
         <h1>Auth</h1>
-        <button className="btn btn-secondary" onClick={this.loginClickEvent}>Login with Google</button>
+        <Button color="secondary" onClick={this.loginClickEvent}>Login with Google</Button>
       </div>
     );
   }

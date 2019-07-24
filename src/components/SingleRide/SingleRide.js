@@ -17,9 +17,9 @@ class SingleRide extends React.Component {
       .catch(error => console.error('unable to get single ride', error));
   }
 
-  // deleteScat = () => {
+  // deleteRide = () => {
   //   const rideId = this.props.match.params.id;
-  //   ridesData.deleteScat(rideId)
+  //   ridesData.deleteRide(rideId)
   //     .then(() => this.props.history.push('/home'))
   //     .catch(error => console.error('unable to delete', error));
   // }
@@ -28,15 +28,38 @@ class SingleRide extends React.Component {
     const { ride } = this.state;
     const editLink = `/edit/${this.props.match.params.id}`;
     return (
-      <div className="SingleRide">
-        <h2>{ride.driverId}</h2>
-        <h3>{ride.isLyftUber}</h3>
-        <h4>{ride.origin}</h4>
-        <h4>{ride.destination}</h4>
-        <h4>{ride.departureTime}</h4>
-        <h4>{ride.openSeats}</h4>
+      <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+        <h2>{this.props.match.params.id}</h2>
+        <table className="table">
+          <tbody>
+            <tr>
+              <th scope='row'><strong>From</strong></th>
+              <td>{ride.origin}</td>
+            </tr>
+            <tr>
+              <th scope='row'><strong>To</strong></th>
+              <td>{ride.destination}</td>
+            </tr>
+            <tr>
+              <th scope='row'><strong>Leaving at</strong></th>
+              <td>{ride.departureTime}</td>
+            </tr>
+            <tr>
+              <th scope='row'><strong>Lyft/Uber?</strong></th>
+              <td>{ride.isLyftUber ? 'Yes' : 'No'}</td>
+            </tr>
+            <tr>
+              <th scope='row'><strong>Open Seats</strong></th>
+              <td>{ride.openSeats}</td>
+            </tr>
+            <tr>
+              <th scope='row'><strong>Organized by</strong></th>
+              <td>{ride.driverId}</td>
+            </tr>
+          </tbody>
+        </table>
         <Link className="btn btn-primary" to={editLink}>Edit</Link>
-        {/* <button className="btn btn-outline-danger" onClick={this.deleteScat}>Delete</button> */}
+        {/* <button className="btn btn-outline-danger" onClick={this.deleteRide}>Delete</button> */}
       </div>
     );
   }
