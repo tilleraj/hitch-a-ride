@@ -13,6 +13,7 @@ import Home from '../components/Home/Home';
 import EditRide from '../components/EditRide/EditRide';
 import NewRide from '../components/NewRide/NewRide';
 import SingleRide from '../components/SingleRide/SingleRide';
+import SingleUser from '../components/SingleUser/SingleUser';
 import NavBar from '../components/NavBar/NavBar';
 import fbConnection from '../helpers/data/connection';
 
@@ -71,6 +72,7 @@ class App extends React.Component {
                   <PrivateRoute path="/new" component={NewRide} authed={authed} />
                   <PrivateRoute path="/edit/:id" component={EditRide} authed={authed} />
                   <PrivateRoute path="/rides/:id" component={SingleRide} authed={authed} />
+                  <PrivateRoute path="/users/:id" component={SingleUser} authed={authed} />
                   <Redirect from="*" to="/auth" />
                 </Switch>
               </div>
