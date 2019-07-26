@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 import ridesData from '../../helpers/data/ridesData';
 
@@ -8,12 +10,20 @@ import './SingleRide.scss';
 class SingleRide extends React.Component {
   state = {
     ride: {},
+    visitorIsOwner: '',
   }
 
   componentDidMount() {
     const rideId = this.props.match.params.id;
     ridesData.getSingleRide(rideId)
-      .then(ridePromise => this.setState({ ride: ridePromise.data }))
+      .then((ridePromise) => {
+        this.setState({ ride: ridePromise.data });
+        if (firebase.auth().currentUser.uid === ridePromise.data.driverId) {
+          this.setState({ visitorIsOwner: true });
+        } else {
+          this.setState({ visitorIsOwner: false });
+        }
+      })
       .catch(error => console.error('unable to get single ride', error));
   }
 
@@ -26,7 +36,11 @@ class SingleRide extends React.Component {
 
   render() {
     const { ride } = this.state;
+    const { visitorIsOwner } = this.state;
     const editLink = `/edit/${this.props.match.params.id}`;
+    const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit Ride</Link>;
+    const deleteButton = <Link className="btn btn-danger" to={'/home'} disabled>Delete Ride</Link>;
+    const joinButton = <Link className="btn btn-success" to={'/home'} disabled>Join Ride</Link>;
     return (
       <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <h2>{this.props.match.params.id}</h2>
@@ -58,7 +72,16 @@ class SingleRide extends React.Component {
             </tr>
           </tbody>
         </table>
-        <Link className="btn btn-primary" to={editLink}>Edit</Link>
+        {
+          (visitorIsOwner !== '' && visitorIsOwner === true)
+            ? <div className='col'>{editButton}{deleteButton}</div>
+            : ''
+        }
+        {
+          (visitorIsOwner !== '' && visitorIsOwner === false)
+            ? <div className='col'>{joinButton}</div>
+            : ''
+        }
         {/* <button className="btn btn-outline-danger" onClick={this.deleteRide}>Delete</button> */}
       </div>
     );

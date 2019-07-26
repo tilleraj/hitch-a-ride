@@ -35,7 +35,6 @@ class EditRide extends React.Component {
     const tempRide = { ...this.state.editRide };
     if (name === 'openSeats') {
       tempRide[name] = Number(e.target.value);
-      console.error(e.target.value);
     } else {
       tempRide[name] = e.target.value;
     }
@@ -56,6 +55,14 @@ class EditRide extends React.Component {
 
   openSeatsChange = e => this.formFieldStringState('openSeats', e);
 
+  formSubmit = (e) => {
+    e.preventDefault();
+    const saveMe = { ...this.state.editRide };
+    const rideId = this.props.match.params.id;
+    ridesData.putRide(saveMe, rideId)
+      .then(() => this.props.history.push(`/rides/${rideId}`))
+      .catch(error => console.error('unable to save', error));
+  }
 
   render() {
     const { editRide } = this.state;
@@ -67,7 +74,7 @@ class EditRide extends React.Component {
             <Label for="origin">Origin</Label>
             <Input
               id="origin"
-              placeholder="12g"
+              placeholder="ex: Venue, Double Tree, etc."
               value={editRide.origin}
               onChange={this.originChange}
             />
@@ -76,7 +83,7 @@ class EditRide extends React.Component {
             <Label for="destination">Destination</Label>
             <Input
               id="destination"
-              placeholder="Brown"
+              placeholder="ex: Double Tree, Venue, etc."
               value={editRide.destination}
               onChange={this.destinationChange}
             />
@@ -85,7 +92,7 @@ class EditRide extends React.Component {
             <Label for="departureTime">Departure Time</Label>
             <Input
               id="departureTime"
-              placeholder="Sample 12"
+              placeholder="17:15"
               type="time"
               value={editRide.departureTime}
               onChange={this.departureTimeChange}
@@ -93,8 +100,8 @@ class EditRide extends React.Component {
           </FormGroup>
           <FormGroup>
             <ButtonGroup id="lyftUberButtonGroup">
-              <Button color="primary" onClick={() => this.lyftUberChange(true)} active={editRide.isLyftUber === true}>Is a Lyft/Uber</Button>
-              <Button color="primary" onClick={() => this.lyftUberChange(false)} active={editRide.isLyftUber === false}>Is not a Lyft/Uber</Button>
+              <Button outline color="info" onClick={() => this.lyftUberChange(true)} active={editRide.isLyftUber === true}>Is a Lyft/Uber</Button>
+              <Button outline color="info" onClick={() => this.lyftUberChange(false)} active={editRide.isLyftUber === false}>Not a Lyft/Uber</Button>
             </ButtonGroup>
           </FormGroup>
           <FormGroup>
@@ -107,7 +114,8 @@ class EditRide extends React.Component {
               onChange={this.openSeatsChange}
             />
           </FormGroup>
-          <Button type="submit" color="primary">Update Ride</Button>
+          <Button type="submit" color="primary" className="mr-4">Submit Changes</Button>
+          <Button type="button" color="warning" onClick={() => this.props.history.push(`/rides/${this.props.match.params.id}`)}>Cancel Changes</Button>
         </Form>
       </div>
     );
