@@ -1,4 +1,11 @@
 import React from 'react';
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -8,9 +15,19 @@ import ridesData from '../../helpers/data/ridesData';
 import './SingleRide.scss';
 
 class SingleRide extends React.Component {
-  state = {
-    ride: {},
-    visitorIsOwner: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      ride: {},
+      visitorIsOwner: '',
+    };
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState({ modal: !this.state.modal });
   }
 
   componentDidMount() {
@@ -27,19 +44,21 @@ class SingleRide extends React.Component {
       .catch(error => console.error('unable to get single ride', error));
   }
 
-  // deleteRide = () => {
-  //   const rideId = this.props.match.params.id;
-  //   ridesData.deleteRide(rideId)
-  //     .then(() => this.props.history.push('/home'))
-  //     .catch(error => console.error('unable to delete', error));
-  // }
+  deleteRide = () => {
+    const rideId = this.props.match.params.id;
+    if (firebase.auth().currentUser.uid === this.state.ride.driverId) {
+      ridesData.deleteRide(rideId)
+        .then(() => this.props.history.push('/home'))
+        .catch(error => console.error('unable to delete', error));
+    }
+  }
 
   render() {
     const { ride } = this.state;
     const { visitorIsOwner } = this.state;
     const editLink = `/edit/${this.props.match.params.id}`;
     const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit Ride</Link>;
-    const deleteButton = <Link className="btn btn-danger" to={'/home'} disabled>Delete Ride</Link>;
+    const deleteButton = <Button color="danger" outline onClick={this.toggle}>Delete</Button>;
     const joinButton = <Link className="btn btn-success" to={'/home'} disabled>Join Ride</Link>;
     return (
       <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
@@ -82,7 +101,19 @@ class SingleRide extends React.Component {
             ? <div className='col'>{joinButton}</div>
             : ''
         }
-        {/* <button className="btn btn-outline-danger" onClick={this.deleteRide}>Delete</button> */}
+        <div>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>Delete this Ride</ModalHeader>
+            <ModalBody>
+              <p>Are you sure you want to delete this ride?</p>
+              <p>This cannot be undone.</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="danger" outline onClick={this.deleteRide}>Yes, I'm sure.</Button>{' '}
+              <Button color="secondary" onClick={this.toggle}>Woops, take me back!</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
     );
   }
