@@ -37,6 +37,7 @@ class NavBar extends React.Component {
     const { authed } = this.props;
     const buildNavbar = () => {
       if (authed) {
+        const profileLink = `/users/${firebase.auth().currentUser.uid}`;
         return (
           <Nav className="ml-auto" navbar>
             <NavItem>
@@ -44,6 +45,9 @@ class NavBar extends React.Component {
             </NavItem>
             <NavItem>
               <NavLink tag={RRNavLink} to='/new'>New Ride</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RRNavLink} to={profileLink}>Profile</NavLink>
             </NavItem>
             <NavItem>
               <NavLink onClick={this.logMeOut}>Logout</NavLink>

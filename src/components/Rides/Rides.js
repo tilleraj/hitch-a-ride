@@ -27,7 +27,7 @@ class Rides extends React.Component {
           <thead>
             <tr>
               <th scope="col">Ride Id</th>
-              <th scope="col">Driver / Orgaizer</th>
+              <th scope="col">Driver / Organizer</th>
               <th scope="col">Lyft/Uber?</th>
               <th scope="col">Origin</th>
               <th scope="col">Destination</th>
