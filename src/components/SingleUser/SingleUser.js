@@ -22,16 +22,21 @@ class SingleUser extends React.Component {
 
   componentDidMount() {
     const userId = this.props.match.params.id;
+    const { uid } = firebase.auth().currentUser;
     usersData.getSingleUser(userId)
       .then((userPromise) => {
-        this.setState({
-          userId: Object.keys(userPromise.data)[0],
-          user: Object.values(userPromise.data)[0],
-        });
-        if (firebase.auth().currentUser.uid === Object.values(userPromise.data)[0].uid) {
-          this.setState({ visitorIsOwner: true });
+        if (Object.entries(userPromise.data).length === 0) {
+          this.props.history.push('/signup');
         } else {
-          this.setState({ visitorIsOwner: false });
+          this.setState({
+            userId: Object.keys(userPromise.data)[0],
+            user: Object.values(userPromise.data)[0],
+          });
+          if (uid === Object.values(userPromise.data)[0].uid) {
+            this.setState({ visitorIsOwner: true });
+          } else {
+            this.setState({ visitorIsOwner: false });
+          }
         }
       })
       .catch(error => console.error('unable to get single user', error));
