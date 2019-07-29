@@ -109,7 +109,7 @@ class SingleRide extends React.Component {
               <p>This cannot be undone.</p>
             </ModalBody>
             <ModalFooter>
-              <Button color="danger" outline onClick={this.deleteRide}>Yes, I'm sure.</Button>{' '}
+              <Button color="danger" outline onClick={this.deleteRide} className="mr-4">Yes, I'm sure.</Button>
               <Button color="secondary" onClick={this.toggle}>Woops, take me back!</Button>
             </ModalFooter>
           </Modal>

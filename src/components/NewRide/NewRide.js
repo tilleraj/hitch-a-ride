@@ -11,6 +11,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 import ridesData from '../../helpers/data/ridesData';
+import usersData from '../../helpers/data/usersData';
 import './NewRide.scss';
 
 const defaultRide = {
@@ -58,6 +59,20 @@ class NewRide extends React.Component {
     ridesData.postRide(saveMe)
       .then(() => this.props.history.push('/home'))
       .catch(error => console.error('unable to save', error));
+  }
+
+  checkProfile = (uid) => {
+    usersData.getSingleUser(uid)
+      .then((resp) => {
+        if (Object.entries(resp.data).length === 0) {
+          this.props.history.push('/signup');
+        }
+      }).catch(error => console.error(error, 'error getting single user'));
+  };
+
+  componentDidMount() {
+    const { uid } = firebase.auth().currentUser;
+    this.checkProfile(uid);
   }
 
   render() {

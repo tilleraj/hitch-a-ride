@@ -1,9 +1,11 @@
 import React from 'react';
+
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
 import Rides from '../Rides/Rides';
 import ridesData from '../../helpers/data/ridesData';
+import usersData from '../../helpers/data/usersData';
 
 import './Home.scss';
 
@@ -12,8 +14,19 @@ class Home extends React.Component {
     rides: [],
   }
 
+  checkProfile = (uid) => {
+    usersData.getSingleUser(uid)
+      .then((resp) => {
+        if (Object.entries(resp.data).length === 0) {
+          this.props.history.push('/signup');
+        }
+      }).catch(error => console.error(error, 'error getting single user'));
+  };
+
   componentDidMount() {
-    ridesData.getRides(firebase.auth().currentUser.uid)
+    const { uid } = firebase.auth().currentUser;
+    this.checkProfile(uid);
+    ridesData.getRides(uid)
       .then(rides => this.setState({ rides }))
       .catch(error => console.error('could not get rides', error));
   }

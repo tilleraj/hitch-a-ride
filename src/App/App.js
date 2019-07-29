@@ -16,6 +16,7 @@ import SingleRide from '../components/SingleRide/SingleRide';
 import SingleUser from '../components/SingleUser/SingleUser';
 import NavBar from '../components/NavBar/NavBar';
 import fbConnection from '../helpers/data/connection';
+import NewUser from '../components/NewUser/NewUser';
 
 import './App.scss';
 
@@ -70,6 +71,7 @@ class App extends React.Component {
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
                   <PrivateRoute path="/home" component={Home} authed={authed} />
                   <PrivateRoute path="/new" component={NewRide} authed={authed} />
+                  <PrivateRoute path="/signup" component={NewUser} authed={authed} />
                   <PrivateRoute path="/edit/:id" component={EditRide} authed={authed} />
                   <PrivateRoute path="/rides/:id" component={SingleRide} authed={authed} />
                   <PrivateRoute path="/users/:id" component={SingleUser} authed={authed} />
