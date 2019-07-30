@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+import rideUsersData from '../../helpers/data/rideUsersData';
 import usersData from '../../helpers/data/usersData';
 import userShape from '../../helpers/props/userShape';
 
@@ -37,6 +38,13 @@ class SingleUser extends React.Component {
           } else {
             this.setState({ visitorIsOwner: false });
           }
+          rideUsersData.getRideUsersByUid(userId)
+            .then((rideUsers) => {
+              const newUser = this.state.user;
+              newUser.rideUsers = rideUsers;
+              this.setState({ user: newUser });
+            })
+            .catch(error => console.error('could not get rideUsers', error));
         }
       })
       .catch(error => console.error('unable to get single user', error));
@@ -63,6 +71,17 @@ class SingleUser extends React.Component {
             <tr>
               <th scope='row'><strong>phone</strong></th>
               <td>{user.phone}</td>
+            </tr>
+            <tr>
+              <th scope='row'><strong>Rides</strong></th>
+              <td>{
+                user
+                && user.rideUsers
+                && user.rideUsers.length > 0
+                && user.rideUsers.map(rideUser => (
+                  <Link key={rideUser.id} to={`/rides/${rideUser.rideId}`}> - {rideUser.rideId}</Link>
+                ))
+              }</td>
             </tr>
           </tbody>
         </table>
