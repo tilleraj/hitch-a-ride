@@ -67,6 +67,28 @@ class SingleRide extends React.Component {
     }
   }
 
+  checkExistingRides = () => {
+    // store current ride
+    // get existing rideUsers by uid
+    // check for rideUsers with same origin and destination (v2 make this a fuzzy match)
+    // if no rideUsers with identical origin and destination => joinRide
+    // else prompt user that they want to change with modal containing info from both rides
+    const { uid } = firebase.auth().currentUser;
+    const { destination, origin } = this.state.ride;
+    rideUsersData.getRideUsersByUid(uid)
+      .then((existingRides) => {
+        const rideIds = [];
+        if (existingRides.length > 0) {
+          existingRides.forEach((ride) => {
+            rideIds.push(ride.rideId);
+          });
+          console.error('rideIds', rideIds);
+        }
+        console.error('origin:', origin, ' destination:', destination);
+      })
+      .catch(error => console.error('unable to checkExistingRides', error));
+  }
+
   joinRide = () => {
     const { uid } = firebase.auth().currentUser;
     const { rideUsers } = this.state.ride;
@@ -101,7 +123,7 @@ class SingleRide extends React.Component {
     const editLink = `/edit/${this.props.match.params.id}`;
     const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit Ride</Link>;
     const deleteButton = <Button color="danger" outline onClick={this.toggle}>Delete</Button>;
-    const joinButton = <Button color="success" onClick={this.joinRide}>Join Ride</Button>;
+    const joinButton = <Button color="success" onClick={this.checkExistingRides}>Join Ride</Button>;
     const leaveButton = <Button color="warning" onClick={this.leaveRide}>Leave</Button>;
     return (
       <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
