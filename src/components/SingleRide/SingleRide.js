@@ -50,6 +50,7 @@ class SingleRide extends React.Component {
             .then((rideUsersWithData) => {
               const newRide = this.state.ride;
               newRide.rideUsers = rideUsersWithData;
+              newRide.openSeats -= newRide.rideUsers.length;
               this.setState({ ride: newRide });
             });
         });
@@ -66,13 +67,33 @@ class SingleRide extends React.Component {
     }
   }
 
+  joinRide = () => {
+    const { uid } = firebase.auth().currentUser;
+    const { rideUsers } = this.state.ride;
+    const matchingUsers = rideUsers.filter(rideUser => rideUser.uid === uid);
+    const rideId = this.props.match.params.id;
+    const newRideUser = {
+      uid,
+      rideId,
+      isRequested: true,
+      isAccepted: false,
+    };
+    if (matchingUsers.length < 1) {
+      rideUsersData.postRideUser(newRideUser)
+        .then(() => this.props.history.push('/home'))
+        .catch(error => console.error('unable to delete', error));
+    } else {
+      console.error('You\'re already in this ride, silly!');
+    }
+  }
+
   render() {
     const { ride } = this.state;
     const { visitorIsOwner } = this.state;
     const editLink = `/edit/${this.props.match.params.id}`;
     const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit Ride</Link>;
     const deleteButton = <Button color="danger" outline onClick={this.toggle}>Delete</Button>;
-    const joinButton = <Link className="btn btn-success" to={'/home'} disabled>Join Ride</Link>;
+    const joinButton = <Button color="success" onClick={this.joinRide}>Join Ride</Button>;
     return (
       <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <h2>{this.props.match.params.id}</h2>
@@ -115,16 +136,8 @@ class SingleRide extends React.Component {
             </tr>
           </tbody>
         </table>
-        {
-          (visitorIsOwner !== '' && visitorIsOwner === true)
-            ? <div className='col'>{editButton}{deleteButton}</div>
-            : ''
-        }
-        {
-          (visitorIsOwner !== '' && visitorIsOwner === false)
-            ? <div className='col'>{joinButton}</div>
-            : ''
-        }
+        {visitorIsOwner !== '' && visitorIsOwner === true && <div className='col'>{editButton}{deleteButton}</div>}
+        {visitorIsOwner !== '' && visitorIsOwner === false && this.state.ride.openSeats > 0 && <div className='col'>{joinButton}</div>}
         <div>
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Delete this Ride</ModalHeader>
