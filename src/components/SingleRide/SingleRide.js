@@ -82,8 +82,6 @@ class SingleRide extends React.Component {
       rideUsersData.postRideUser(newRideUser)
         .then(() => this.props.history.push('/home'))
         .catch(error => console.error('unable to delete', error));
-    } else {
-      console.error('You\'re already in this ride, silly!');
     }
   }
 
@@ -121,7 +119,12 @@ class SingleRide extends React.Component {
             </tr>
             <tr>
               <th scope='row'><strong>Organized by</strong></th>
-              <td>{ride.driverId}</td>
+              <td>{
+                ride.driverId
+                && ride.rideUsers
+                && ride.rideUsers.length > 0
+                && ride.rideUsers.find(rideUser => rideUser.uid === ride.driverId)
+                && ride.rideUsers.find(rideUser => rideUser.uid === ride.driverId).name}</td>
             </tr>
             <tr>
               <th scope='row'><strong>Riders</strong></th>
