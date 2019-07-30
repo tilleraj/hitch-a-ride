@@ -11,15 +11,17 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 import ridesData from '../../helpers/data/ridesData';
+import rideUsersData from '../../helpers/data/rideUsersData';
 
 import './SingleRide.scss';
+import usersData from '../../helpers/data/usersData';
 
 class SingleRide extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      ride: {},
+      ride: { rideUsers: [] },
       visitorIsOwner: '',
     };
 
@@ -40,6 +42,16 @@ class SingleRide extends React.Component {
         } else {
           this.setState({ visitorIsOwner: false });
         }
+        rideUsersData.getRideUsersByRideId(rideId).then((rideUsersByRideId) => {
+          const rideWithRiders = this.state.ride;
+          rideWithRiders.rideUsers = rideUsersByRideId;
+          this.setState({ ride: rideWithRiders });
+          usersData.getUserDataForRide(this.state.ride).then((rideUsersWithData) => {
+            const newRide = this.state.ride;
+            newRide.rideUsers = rideUsersWithData;
+            this.setState({ ride: newRide });
+          });
+        });
       })
       .catch(error => console.error('unable to get single ride', error));
   }
@@ -88,6 +100,15 @@ class SingleRide extends React.Component {
             <tr>
               <th scope='row'><strong>Organized by</strong></th>
               <td>{ride.driverId}</td>
+            </tr>
+            <tr>
+              <th scope='row'><strong>Riders</strong></th>
+              <td><p>{ride && ride.rideUsers && ride.rideUsers.length > 0 && ride.rideUsers.map(rideUser => (
+                <Link
+                  key={rideUser.id}
+                  to={`/users/${rideUser.uid}`}
+                > - {rideUser.name}</Link>
+              ))}</p></td>
             </tr>
           </tbody>
         </table>
