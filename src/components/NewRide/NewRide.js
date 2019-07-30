@@ -12,6 +12,7 @@ import 'firebase/auth';
 
 import ridesData from '../../helpers/data/ridesData';
 import usersData from '../../helpers/data/usersData';
+import rideUsersData from '../../helpers/data/rideUsersData';
 import './NewRide.scss';
 
 const defaultRide = {
@@ -52,12 +53,26 @@ class NewRide extends React.Component {
 
   openSeatsChange = e => this.formFieldStringState('openSeats', e);
 
+  joinRide = (rideId, uid) => {
+    const newRideUser = {
+      uid,
+      rideId,
+      isRequested: false,
+      isAccepted: true,
+    };
+    rideUsersData.postRideUser(newRideUser)
+      .then(() => this.props.history.push('/home'))
+      .catch(error => console.error('unable to join newRide', error));
+  }
+
   formSubmit = (e) => {
     e.preventDefault();
     const saveMe = { ...this.state.newRide };
     saveMe.driverId = firebase.auth().currentUser.uid;
     ridesData.postRide(saveMe)
-      .then(() => this.props.history.push('/home'))
+      .then((rideId) => {
+        this.joinRide(rideId.data.name, saveMe.driverId);
+      })
       .catch(error => console.error('unable to save', error));
   }
 
