@@ -46,11 +46,12 @@ class SingleRide extends React.Component {
           const rideWithRiders = this.state.ride;
           rideWithRiders.rideUsers = rideUsersByRideId;
           this.setState({ ride: rideWithRiders });
-          usersData.getUserDataForRide(this.state.ride).then((rideUsersWithData) => {
-            const newRide = this.state.ride;
-            newRide.rideUsers = rideUsersWithData;
-            this.setState({ ride: newRide });
-          });
+          usersData.getUserDataForRide(this.state.ride)
+            .then((rideUsersWithData) => {
+              const newRide = this.state.ride;
+              newRide.rideUsers = rideUsersWithData;
+              this.setState({ ride: newRide });
+            });
         });
       })
       .catch(error => console.error('unable to get single ride', error));
@@ -103,12 +104,14 @@ class SingleRide extends React.Component {
             </tr>
             <tr>
               <th scope='row'><strong>Riders</strong></th>
-              <td><p>{ride && ride.rideUsers && ride.rideUsers.length > 0 && ride.rideUsers.map(rideUser => (
-                <Link
-                  key={rideUser.id}
-                  to={`/users/${rideUser.uid}`}
-                > - {rideUser.name}</Link>
-              ))}</p></td>
+              <td>{
+                ride
+                && ride.rideUsers
+                && ride.rideUsers.length > 0
+                && ride.rideUsers.map(rideUser => (
+                  <Link key={rideUser.id} to={`/users/${rideUser.uid}`}> - {rideUser.name}</Link>
+                ))
+              }</td>
             </tr>
           </tbody>
         </table>

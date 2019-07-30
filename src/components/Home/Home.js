@@ -26,7 +26,7 @@ class Home extends React.Component {
   componentDidMount() {
     const { uid } = firebase.auth().currentUser;
     this.checkProfile(uid);
-    ridesData.getRides(uid)
+    ridesData.getRides()
       .then(rides => this.setState({ rides }))
       .catch(error => console.error('could not get rides', error));
   }
