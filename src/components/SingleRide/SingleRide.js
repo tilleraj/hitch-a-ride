@@ -81,17 +81,28 @@ class SingleRide extends React.Component {
     if (matchingUsers.length < 1) {
       rideUsersData.postRideUser(newRideUser)
         .then(() => this.props.history.push('/home'))
-        .catch(error => console.error('unable to delete', error));
+        .catch(error => console.error('unable to join', error));
     }
+  }
+
+  leaveRide = () => {
+    const { uid } = firebase.auth().currentUser;
+    const { rideUsers } = this.state.ride;
+    const matchingRideUser = rideUsers.find(rideUser => rideUser.uid === uid);
+    rideUsersData.deleteRideUser(matchingRideUser.id)
+      .then(() => this.props.history.push('/home'))
+      .catch(error => console.error('unable to delete', error));
   }
 
   render() {
     const { ride } = this.state;
+    const { uid } = firebase.auth().currentUser;
     const { visitorIsOwner } = this.state;
     const editLink = `/edit/${this.props.match.params.id}`;
     const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit Ride</Link>;
     const deleteButton = <Button color="danger" outline onClick={this.toggle}>Delete</Button>;
     const joinButton = <Button color="success" onClick={this.joinRide}>Join Ride</Button>;
+    const leaveButton = <Button color="warning" onClick={this.leaveRide}>Leave</Button>;
     return (
       <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <h2>{this.props.match.params.id}</h2>
@@ -140,7 +151,24 @@ class SingleRide extends React.Component {
           </tbody>
         </table>
         {visitorIsOwner !== '' && visitorIsOwner === true && <div className='col'>{editButton}{deleteButton}</div>}
-        {visitorIsOwner !== '' && visitorIsOwner === false && this.state.ride.openSeats > 0 && <div className='col'>{joinButton}</div>}
+        {visitorIsOwner !== ''
+          && visitorIsOwner === false
+          && ride.rideUsers
+          && ride.rideUsers.length
+          && ride.rideUsers.length > 0
+          && ride.rideUsers.find(rideUser => rideUser.uid === uid)
+          && <div className='col'>{leaveButton}</div>}
+        {visitorIsOwner !== ''
+          && visitorIsOwner === false
+          && ride.rideUsers
+          && ride.rideUsers.length
+          && ride.rideUsers.length > 0
+          && visitorIsOwner !== ''
+          && visitorIsOwner === false
+          && ride.openSeats > 0
+          && !ride.rideUsers.find(rideUser => rideUser.uid === uid)
+          && <div className='col'>{joinButton}</div>
+        }
         <div>
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
             <ModalHeader toggle={this.toggle}>Delete this Ride</ModalHeader>
