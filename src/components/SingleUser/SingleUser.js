@@ -52,9 +52,9 @@ class SingleUser extends React.Component {
 
   render() {
     const { user } = this.state;
-    const { visitorIsOwner } = this.state;
-    const editLink = '/home';
-    const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit User</Link>;
+    // const { visitorIsOwner } = this.state;
+    // const editLink = '/home';
+    // const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit User</Link>;
     return (
       <div className="SingleUser  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <h2>{this.props.match.params.id}</h2>
@@ -85,11 +85,11 @@ class SingleUser extends React.Component {
             </tr>
           </tbody>
         </table>
-        {
+        {/* {
           (visitorIsOwner !== '' && visitorIsOwner === true)
             ? <div className='col'>{editButton}</div>
             : ''
-        }
+        } */}
       </div>
     );
   }

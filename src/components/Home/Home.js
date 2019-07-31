@@ -38,8 +38,7 @@ class Home extends React.Component {
               return newRide;
             });
             this.setState({ rides: ridesWithUserInfo });
-          })
-          .catch();
+          });
       })
       .catch(error => console.error('could not get rides', error));
   }

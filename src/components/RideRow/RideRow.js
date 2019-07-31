@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import rideShape from '../../helpers/props/rideShape';
+import rideUsersData from '../../helpers/data/rideUsersData';
 
 import './RideRow.scss';
 
@@ -12,8 +13,19 @@ class RideRow extends React.Component {
     rides: PropTypes.arrayOf(rideShape.rideShape),
   }
 
+  state = {
+    numPassengers: 0,
+  }
+
+  componentDidMount() {
+    rideUsersData.getRideUsersByRideId(this.props.ride.id).then((rideUsersByRideId) => {
+      this.setState({ numPassengers: rideUsersByRideId.length });
+    });
+  }
+
   render() {
     const { ride } = this.props;
+    const { numPassengers } = this.state;
     // const editLink = `/edit/${ride.id}`;
     const singleLink = `/rides/${ride.id}`;
     return (
@@ -24,7 +36,7 @@ class RideRow extends React.Component {
         <td>{ride.origin}</td>
         <td>{ride.destination}</td>
         <td>{ride.departureTime}</td>
-        <td>{ride.openSeats}</td>
+        <td>{ride.totalSeats - numPassengers}</td>
         <td><Link className="btn btn-success" to={singleLink}>View</Link></td>
       </tr>
     );

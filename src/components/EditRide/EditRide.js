@@ -16,7 +16,7 @@ const defaultRide = {
   origin: '',
   destination: '',
   departureTime: '',
-  openSeats: '',
+  totalSeats: '',
 };
 
 class EditRide extends React.Component {
@@ -33,7 +33,7 @@ class EditRide extends React.Component {
 
   formFieldStringState = (name, e) => {
     const tempRide = { ...this.state.editRide };
-    if (name === 'openSeats') {
+    if (name === 'totalSeats') {
       tempRide[name] = Number(e.target.value);
     } else {
       tempRide[name] = e.target.value;
@@ -53,7 +53,7 @@ class EditRide extends React.Component {
 
   departureTimeChange = e => this.formFieldStringState('departureTime', e);
 
-  openSeatsChange = e => this.formFieldStringState('openSeats', e);
+  totalSeatsChange = e => this.formFieldStringState('totalSeats', e);
 
   formSubmit = (e) => {
     e.preventDefault();
@@ -105,13 +105,13 @@ class EditRide extends React.Component {
             </ButtonGroup>
           </FormGroup>
           <FormGroup>
-            <Label for="openSeats">Open Seats</Label>
+            <Label for="totalSeats">Total Seats</Label>
             <Input
-              id="openSeats"
-              placeholder="3"
+              id="totalSeats"
+              placeholder="-"
               type="number"
-              value={editRide.openSeats}
-              onChange={this.openSeatsChange}
+              value={editRide.totalSeats}
+              onChange={this.totalSeatsChange}
             />
           </FormGroup>
           <Button type="submit" color="primary" className="mr-4">Submit Changes</Button>

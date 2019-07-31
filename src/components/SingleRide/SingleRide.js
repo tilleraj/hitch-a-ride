@@ -59,7 +59,7 @@ class SingleRide extends React.Component {
             .then((rideUsersWithData) => {
               const newRide = this.state.ride;
               newRide.rideUsers = rideUsersWithData;
-              newRide.openSeats -= newRide.rideUsers.length;
+              newRide.totalSeats -= newRide.rideUsers.length;
               this.setState({ ride: newRide });
             });
         });
@@ -120,11 +120,11 @@ class SingleRide extends React.Component {
                 const oldRideInfo = `departing at ${matchingRide.departureTime} and organized by ${matchingRide.driverId}`;
                 this.setState({ newRideInfo, oldRideInfo });
                 this.toggleUpdateModal();
-              } else {
-                this.joinRide();
               }
             })
             .catch(error => console.error('problem with Promise.all in checkExistingRides', error));
+        } else {
+          this.joinRide();
         }
       })
       .catch(error => console.error('unable to checkExistingRides', error));
@@ -189,7 +189,7 @@ class SingleRide extends React.Component {
             </tr>
             <tr>
               <th scope='row'><strong>Open Seats</strong></th>
-              <td>{ride.openSeats}</td>
+              <td>{ride.totalSeats}</td>
             </tr>
             <tr>
               <th scope='row'><strong>Organized by</strong></th>
@@ -228,7 +228,7 @@ class SingleRide extends React.Component {
           && ride.rideUsers.length > 0
           && visitorIsOwner !== ''
           && visitorIsOwner === false
-          && ride.openSeats > 0
+          && ride.totalSeats > 0
           && !ride.rideUsers.find(rideUser => rideUser.uid === uid)
           && <div className='col'>{joinButton}</div>
         }

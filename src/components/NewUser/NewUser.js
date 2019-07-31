@@ -73,7 +73,7 @@ class NewUser extends React.Component {
             <Label for="phone">Phone</Label>
             <Input
               id="phone"
-              placeholder="ex: Double Tree, Venue, etc."
+              placeholder="(123) 456-7890"
               value={newUser.phone}
               onChange={this.phoneChange}
             />

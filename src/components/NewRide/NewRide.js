@@ -21,7 +21,7 @@ const defaultRide = {
   origin: '',
   destination: '',
   departureTime: '',
-  openSeats: '',
+  totalSeats: '',
 };
 
 class NewRide extends React.Component {
@@ -31,7 +31,7 @@ class NewRide extends React.Component {
 
   formFieldStringState = (name, e) => {
     const tempRide = { ...this.state.newRide };
-    if (name === 'openSeats') {
+    if (name === 'totalSeats') {
       tempRide[name] = Number(e.target.value);
     } else {
       tempRide[name] = e.target.value;
@@ -51,7 +51,7 @@ class NewRide extends React.Component {
 
   departureTimeChange = e => this.formFieldStringState('departureTime', e);
 
-  openSeatsChange = e => this.formFieldStringState('openSeats', e);
+  totalSeatsChange = e => this.formFieldStringState('totalSeats', e);
 
   joinRide = (rideId, uid) => {
     const newRideUser = {
@@ -131,13 +131,13 @@ class NewRide extends React.Component {
             </ButtonGroup>
           </FormGroup>
           <FormGroup>
-            <Label for="openSeats">Open Seats</Label>
+            <Label for="totalSeats">Total Seats</Label>
             <Input
-              id="openSeats"
-              placeholder="3"
+              id="totalSeats"
+              placeholder="-"
               type="number"
-              value={newRide.openSeats}
-              onChange={this.openSeatsChange}
+              value={newRide.totalSeats}
+              onChange={this.totalSeatsChange}
             />
           </FormGroup>
           <Button type="submit" color="primary" className="mr-4">Create Ride</Button>

@@ -6,7 +6,7 @@ const rideShape = PropTypes.shape({
   origin: PropTypes.string.isRequired,
   destination: PropTypes.string.isRequired,
   departureTime: PropTypes.string.isRequired,
-  openSeats: PropTypes.number.isRequired,
+  totalSeats: PropTypes.number.isRequired,
 });
 
 export default { rideShape };
