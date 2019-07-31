@@ -1,50 +1,50 @@
 {
-  "ride01asdfqwerty12345": {
-    "driverId": "user01asdfqwerty12345",
+  "ride01databaseID": {
+    "driverId": "user01authID",
     "isLyftUber": false,
     "origin": "Fairfield Inn",
-    "destination": "venue",
+    "destination": "White Oak Farms",
     "departureTime": "5:00pm",
-    "openSeats": 4
+    "totalSeats": 4
   },
-  "ride02asdfqwerty12345": {
-    "driverId": "user02asdfqwerty12345",
+  "ride02databaseID": {
+    "driverId": "user02authID",
     "isLyftUber": false,
     "origin": "Double Tree",
-    "destination": "venue",
+    "destination": "White Oak Farms",
     "departureTime": "5:30pm",
-    "openSeats": 4
+    "totalSeats": 4
   },
-  "ride03asdfqwerty12345": {
-    "driverId": "user03asdfqwerty12345",
+  "ride03databaseID": {
+    "driverId": "user03authID",
     "isLyftUber": true,
     "origin": "Courtyard",
-    "destination": "venue",
+    "destination": "White Oak Farms",
     "departureTime": "5:45pm",
-    "openSeats": 3
+    "totalSeats": 3
   },
-  "ride04asdfqwerty12345": {
-    "driverId": "user01asdfqwerty12345",
+  "ride04databaseID": {
+    "driverId": "user01authID",
     "isLyftUber": false,
-    "origin": "venue",
+    "origin": "White Oak Farms",
     "destination": "Fairfield Inn",
     "departureTime": "10:00pm",
-    "openSeats": 4
+    "totalSeats": 4
   },
-  "ride05asdfqwerty12345": {
-    "driverId": "user02asdfqwerty12345",
+  "ride05databaseID": {
+    "driverId": "user02authID",
     "isLyftUber": false,
-    "origin": "venue",
+    "origin": "White Oak Farms",
     "destination": "Double Tree",
     "departureTime": "10:30pm",
-    "openSeats": 4
+    "totalSeats": 4
   },
-  "ride06asdfqwerty12345": {
-    "driverId": "user03asdfqwerty12345",
+  "ride06databaseID": {
+    "driverId": "user03authID",
     "isLyftUber": true,
-    "origin": "venue",
+    "origin": "White Oak Farms",
     "destination": "Courtyard",
     "departureTime": "10:45pm",
-    "openSeats": 3
+    "totalSeats": 3
   }
 }
