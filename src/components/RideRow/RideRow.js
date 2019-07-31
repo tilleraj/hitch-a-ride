@@ -19,7 +19,7 @@ class RideRow extends React.Component {
     return (
       <tr>
         <td>{ride.id}</td>
-        <td>{ride.driverId}</td>
+        <td><Link key={ride.driverId} to={`/users/${ride.driverId}`}>{ride.driverName}</Link></td>
         <td>{ride.isLyftUber ? 'Yes' : 'No'}</td>
         <td>{ride.origin}</td>
         <td>{ride.destination}</td>

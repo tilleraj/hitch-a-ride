@@ -34,17 +34,10 @@ class Home extends React.Component {
             const ridesWithUserInfo = this.state.rides.map((ride, r) => {
               const newRide = this.state.rides[r];
               const owner = usersArray[r].data;
-              Object.keys(owner).forEach((key) => {
-                const value = owner[key];
-                Object.keys(value).forEach((key2) => {
-                  console.error(key2);
-                  // newRide.owner[key] = value;
-                });
-                // newRide.owner[key] = value;
-              });
+              newRide.driverName = owner[Object.keys(owner)].name;
               return newRide;
             });
-            console.error(ridesWithUserInfo);
+            this.setState({ rides: ridesWithUserInfo });
           })
           .catch();
       })

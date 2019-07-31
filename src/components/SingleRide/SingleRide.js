@@ -71,7 +71,15 @@ class SingleRide extends React.Component {
     const rideId = this.props.match.params.id;
     if (firebase.auth().currentUser.uid === this.state.ride.driverId) {
       ridesData.deleteRide(rideId)
-        .then(() => this.props.history.push('/home'))
+        .then(() => {
+          rideUsersData.getRideUsersByRideId(rideId)
+            .then((rideUsersArray) => {
+              rideUsersArray.forEach((rideUser) => {
+                rideUsersData.deleteRideUser(rideUser.id);
+              });
+            });
+          this.props.history.push('/home');
+        })
         .catch(error => console.error('unable to delete', error));
     }
   }
