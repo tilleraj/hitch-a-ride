@@ -107,9 +107,7 @@ class SingleRide extends React.Component {
                   && ride.destination === destination,
               );
               if (matchingRide) {
-                console.error('matchingRide', matchingRide);
                 const { ride } = this.state;
-                // const matchingRideInfo = `from ${ride.origin} to ${ride.destination}`;
                 const newRideInfo = `departing at ${ride.departureTime} and organized by ${ride.driverId}`;
                 const oldRideInfo = `departing at ${matchingRide.departureTime} and organized by ${matchingRide.driverId}`;
                 this.setState({ newRideInfo, oldRideInfo });
@@ -118,7 +116,7 @@ class SingleRide extends React.Component {
                 this.joinRide();
               }
             })
-            .catch();
+            .catch(error => console.error('problem with Promise.all in checkExistingRides', error));
         }
       })
       .catch(error => console.error('unable to checkExistingRides', error));
