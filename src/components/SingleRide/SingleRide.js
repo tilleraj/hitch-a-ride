@@ -20,16 +20,25 @@ class SingleRide extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
+      deleteModal: false,
+      updateModal: false,
       ride: { rideUsers: [] },
       visitorIsOwner: '',
+      oldRideInfo: '',
+      newRideInfo: '',
+      matchingRideInfo: '',
     };
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+    this.toggleUpdateModal = this.toggleUpdateModal.bind(this);
   }
 
-  toggle() {
-    this.setState({ modal: !this.state.modal });
+  toggleDeleteModal() {
+    this.setState({ deleteModal: !this.state.deleteModal });
+  }
+
+  toggleUpdateModal() {
+    this.setState({ updateModal: !this.state.updateModal });
   }
 
   componentDidMount() {
@@ -99,9 +108,14 @@ class SingleRide extends React.Component {
               );
               if (matchingRide) {
                 console.error('matchingRide', matchingRide);
+                const { ride } = this.state;
+                // const matchingRideInfo = `from ${ride.origin} to ${ride.destination}`;
+                const newRideInfo = `departing at ${ride.departureTime} and organized by ${ride.driverId}`;
+                const oldRideInfo = `departing at ${matchingRide.departureTime} and organized by ${matchingRide.driverId}`;
+                this.setState({ newRideInfo, oldRideInfo });
+                this.toggleUpdateModal();
               } else {
-                console.error('no conflicting rides');
-                // this.joinRide();
+                this.joinRide();
               }
             })
             .catch();
@@ -143,7 +157,7 @@ class SingleRide extends React.Component {
     const { visitorIsOwner } = this.state;
     const editLink = `/edit/${this.props.match.params.id}`;
     const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit Ride</Link>;
-    const deleteButton = <Button color="danger" outline onClick={this.toggle}>Delete</Button>;
+    const deleteButton = <Button color="danger" outline onClick={this.toggleDeleteModal}>Delete</Button>;
     const joinButton = <Button color="success" onClick={this.checkExistingRides}>Join Ride</Button>;
     const leaveButton = <Button color="warning" onClick={this.leaveRide}>Leave</Button>;
     return (
@@ -213,15 +227,30 @@ class SingleRide extends React.Component {
           && <div className='col'>{joinButton}</div>
         }
         <div>
-          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-            <ModalHeader toggle={this.toggle}>Delete this Ride</ModalHeader>
+          <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal}>
+            <ModalHeader toggle={this.toggleDeleteModal}>Delete this Ride</ModalHeader>
             <ModalBody>
               <p>Are you sure you want to delete this ride?</p>
               <p>This cannot be undone.</p>
             </ModalBody>
             <ModalFooter>
               <Button color="danger" outline onClick={this.deleteRide} className="mr-4">Yes, I'm sure.</Button>
-              <Button color="secondary" onClick={this.toggle}>Woops, take me back!</Button>
+              <Button color="secondary" onClick={this.toggleDeleteModal}>Woops, take me back!</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
+        <div>
+          <Modal isOpen={this.state.updateModal} toggle={this.toggleUpdateModal}>
+            <ModalHeader toggle={this.toggleUpdateModal}>Change Ride</ModalHeader>
+            <ModalBody>
+              <p>It looks like you're already in a ride from <strong>{this.state.ride.origin}</strong> to <strong>{this.state.ride.destination}</strong>.</p>
+              <p>Do you want to leave the ride {this.state.oldRideInfo}?</p>
+              <p>You will be joining the ride {this.state.newRideInfo}.</p>
+              <p>This cannot be undone.</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="warning" outline onClick={this.joinRide} className="mr-4">Yes, I'm sure.</Button>
+              <Button color="secondary" onClick={this.toggleUpdateModal}>Woops, take me back!</Button>
             </ModalFooter>
           </Modal>
         </div>
