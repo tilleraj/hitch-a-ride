@@ -82,9 +82,30 @@ class SingleRide extends React.Component {
           existingRides.forEach((ride) => {
             rideIds.push(ride.rideId);
           });
-          console.error('rideIds', rideIds);
+          Promise.all(rideIds.map(rideId => (ridesData.getSingleRide(rideId))))
+            .then((arrayOfSingleRides) => {
+              const singleRidesWithRideIds = arrayOfSingleRides.map((ride, r) => {
+                const newRide = {};
+                newRide.id = rideIds[r];
+                Object.keys(ride.data).forEach((key) => {
+                  const value = ride.data[key];
+                  newRide[key] = value;
+                });
+                return newRide;
+              });
+              const matchingRide = singleRidesWithRideIds.find(
+                ride => ride.origin === origin
+                  && ride.destination === destination,
+              );
+              if (matchingRide) {
+                console.error('matchingRide', matchingRide);
+              } else {
+                console.error('no conflicting rides');
+                // this.joinRide();
+              }
+            })
+            .catch();
         }
-        console.error('origin:', origin, ' destination:', destination);
       })
       .catch(error => console.error('unable to checkExistingRides', error));
   }
