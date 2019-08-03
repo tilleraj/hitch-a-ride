@@ -120,6 +120,8 @@ class SingleRide extends React.Component {
                 const oldRideInfo = `departing at ${matchingRide.departureTime} and organized by ${matchingRide.driverId}`;
                 this.setState({ newRideInfo, oldRideInfo });
                 this.toggleUpdateModal();
+              } else {
+                this.joinRide();
               }
             })
             .catch(error => console.error('problem with Promise.all in checkExistingRides', error));
