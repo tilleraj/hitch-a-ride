@@ -35,6 +35,7 @@ class NewUser extends React.Component {
   phoneChange = e => this.formFieldStringState('phone', e);
 
   formSubmit = (e) => {
+    e.preventDefault();
     const saveMe = { ...this.state.newUser };
     saveMe.uid = firebase.auth().currentUser.uid;
     usersData.postUser(saveMe)
