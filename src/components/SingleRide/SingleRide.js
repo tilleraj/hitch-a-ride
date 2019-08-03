@@ -251,7 +251,9 @@ class SingleRide extends React.Component {
           <Modal isOpen={this.state.updateModal} toggle={this.toggleUpdateModal}>
             <ModalHeader toggle={this.toggleUpdateModal}>Change Ride</ModalHeader>
             <ModalBody>
-              <p>It looks like you're already in a ride from <strong>{this.state.ride.origin}</strong> to <strong>{this.state.ride.destination}</strong>.</p>
+              <p>It looks like you're already in a ride
+                from <strong>{this.state.ride.origin}</strong>
+                to <strong>{this.state.ride.destination}</strong>.</p>
               <p>Do you want to leave the ride {this.state.oldRideInfo}?</p>
               <p>You will be joining the ride {this.state.newRideInfo}.</p>
               <p>This cannot be undone.</p>
