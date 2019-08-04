@@ -12,7 +12,6 @@ import 'firebase/auth';
 
 import ridesData from '../../helpers/data/ridesData';
 import rideUsersData from '../../helpers/data/rideUsersData';
-
 import './SingleRide.scss';
 import usersData from '../../helpers/data/usersData';
 
@@ -24,6 +23,7 @@ class SingleRide extends React.Component {
       updateModal: false,
       ride: { rideUsers: [] },
       visitorIsOwner: '',
+      oldRide: {},
       oldRideInfo: '',
       newRideInfo: '',
       matchingRideInfo: '',
@@ -116,9 +116,10 @@ class SingleRide extends React.Component {
               );
               if (matchingRide) {
                 const { ride } = this.state;
-                const newRideInfo = `departing at ${ride.departureTime} and organized by ${ride.driverId}`;
-                const oldRideInfo = `departing at ${matchingRide.departureTime} and organized by ${matchingRide.driverId}`;
-                this.setState({ newRideInfo, oldRideInfo });
+                const oldRide = matchingRide;
+                const newRideInfo = `departing at ${ride.departureTime}`;
+                const oldRideInfo = `departing at ${matchingRide.departureTime}`;
+                this.setState({ newRideInfo, oldRideInfo, oldRide });
                 this.toggleUpdateModal();
               } else {
                 this.joinRide();
@@ -148,6 +149,20 @@ class SingleRide extends React.Component {
         .then(() => this.props.history.push('/home'))
         .catch(error => console.error('unable to join', error));
     }
+  }
+
+  changeRides = () => {
+    const { uid } = firebase.auth().currentUser;
+    const oldRideId = this.state.oldRide.id;
+    rideUsersData.getRideUsersByUid(uid)
+      .then((rideUsers) => {
+        const matchingRideUser = rideUsers.find(rideUser => rideUser.rideId === oldRideId);
+        rideUsersData.deleteRideUser(matchingRideUser.id);
+      })
+      .then(() => {
+        this.joinRide();
+      })
+      .catch(error => console.error('unable to change rides', error));
   }
 
   leaveRide = () => {
@@ -252,14 +267,13 @@ class SingleRide extends React.Component {
             <ModalHeader toggle={this.toggleUpdateModal}>Change Ride</ModalHeader>
             <ModalBody>
               <p>It looks like you're already in a ride
-                from <strong>{this.state.ride.origin}</strong>
+                from <strong>{this.state.ride.origin} </strong>
                 to <strong>{this.state.ride.destination}</strong>.</p>
-              <p>Do you want to leave the ride {this.state.oldRideInfo}?</p>
-              <p>You will be joining the ride {this.state.newRideInfo}.</p>
+              <p>Do you want to leave the ride {this.state.oldRideInfo} to join the ride {this.state.newRideInfo}?</p>
               <p>This cannot be undone.</p>
             </ModalBody>
             <ModalFooter>
-              <Button color="warning" outline onClick={this.joinRide} className="mr-4">Yes, I'm sure.</Button>
+              <Button color="warning" outline onClick={this.changeRides} className="mr-4">Yes, I'm sure.</Button>
               <Button color="secondary" onClick={this.toggleUpdateModal}>Woops, take me back!</Button>
             </ModalFooter>
           </Modal>
