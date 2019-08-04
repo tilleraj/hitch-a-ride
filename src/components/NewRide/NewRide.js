@@ -141,7 +141,7 @@ class NewRide extends React.Component {
             />
           </FormGroup>
           <Button type="submit" color="primary" className="mr-4">Create Ride</Button>
-          <Button type="button" color="warning" onClick={() => this.props.history.push(`/rides/${this.props.match.params.id}`)}>Cancel Ride</Button>
+          <Button type="button" color="warning" onClick={() => this.props.history.push('/home')}>Cancel Ride</Button>
         </Form>
       </div>
     );
