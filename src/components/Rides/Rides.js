@@ -16,8 +16,6 @@ class Rides extends React.Component {
       <RideRow
         key={ride.id}
         ride={ride}
-        deleteRide={this.props.deleteRide}
-        selectRideToEdit={this.props.selectRideToEdit}
       />
     ));
     return (

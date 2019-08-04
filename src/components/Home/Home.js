@@ -56,8 +56,6 @@ class Home extends React.Component {
           <div className="row">
             <Rides
               rides={rides}
-              deleteRide={this.deleteRide}
-              selectRideToEdit={this.selectRideToEdit}
             />
           </div>
         </div>
