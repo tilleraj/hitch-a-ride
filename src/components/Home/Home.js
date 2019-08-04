@@ -49,14 +49,15 @@ class Home extends React.Component {
     } = this.state;
     return (
       <div className="Home">
-        <h2>Home</h2>
-        {/* <button className="btn btn-warning" onClick={this.editEvent}>Edit</button> */}
-        {/* <Link to={singleLink}>View Single</Link> */}
         <div className="container">
           <div className="row">
-            <Rides
-              rides={rides}
-            />
+            <div className="col">
+              <div className="card">
+                <Rides
+                  rides={rides}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

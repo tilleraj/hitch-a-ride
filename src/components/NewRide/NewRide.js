@@ -21,7 +21,7 @@ const defaultRide = {
   origin: '',
   destination: '',
   departureTime: '',
-  totalSeats: '',
+  totalSeats: '2',
 };
 
 class NewRide extends React.Component {
