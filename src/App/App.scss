@@ -18,11 +18,11 @@ $color5: rgba(123, 67, 91, 1);
 /* Coolors Exported Palette - coolors.co/9ed1c7-91b5ba-7f809b-664c5d-542d3e */
 
 /* HSL */
-$color1: hsla(168%, 36%, 72%, 1);
-$color2: hsla(187%, 23%, 65%, 1);
-$color3: hsla(238%, 12%, 55%, 1);
-$color4: hsla(321%, 15%, 35%, 1);
-$color5: hsla(334%, 30%, 25%, 1);
+$color1: hsla(168, 36%, 72%, 1);
+$color2: hsla(187, 23%, 65%, 1);
+$color3: hsla(238, 12%, 55%, 1);
+$color4: hsla(321, 15%, 35%, 1);
+$color5: hsla(334, 30%, 25%, 1);
 
 /* RGB */
 $color1: rgba(158, 209, 199, 1);
@@ -65,8 +65,12 @@ $color5: rgba(84, 45, 62, 1);
 }
 
 body {
-  background-color: rgba(102, 76, 93, 1);
+  background-color: hsla(321, 15%, 35%, 1);
   // Photo Credit Tom The Photographer https://unsplash.com/@tomthephotographer
+  background-image:
+  linear-gradient(to bottom, hsla(321, 15%, 35%, 0.5), hsla(334, 75%, 10%, 1)),
+  url('https://raw.githubusercontent.com/tilleraj/hitch-a-ride/master/assets/images/background.jpg');
+  background-size: auto 150vh;
 }
 .card {
   box-shadow: 4px 6px 10px -4px rgba(0, 0, 0, 0.25);
