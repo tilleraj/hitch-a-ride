@@ -48,17 +48,11 @@ class Home extends React.Component {
       rides,
     } = this.state;
     return (
-      <div className="Home">
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <div className="card">
-                <Rides
-                  rides={rides}
-                />
-              </div>
-            </div>
-          </div>
+      <div className="Home col">
+        <div className="card">
+          <Rides
+            rides={rides}
+          />
         </div>
       </div>
     );

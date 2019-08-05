@@ -56,40 +56,42 @@ class SingleUser extends React.Component {
     // const editLink = '/home';
     // const editButton = <Link className="btn btn-warning mr-4" to={editLink}>Edit User</Link>;
     return (
-      <div className="SingleUser  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <h2>{this.props.match.params.id}</h2>
-        <table className="table">
-          <tbody>
-            <tr>
-              <th scope='row'><strong>uid</strong></th>
-              <td>{user.uid}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>name</strong></th>
-              <td>{user.name}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>phone</strong></th>
-              <td>{user.phone}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>Rides</strong></th>
-              <td>{
-                user
-                && user.rideUsers
-                && user.rideUsers.length > 0
-                && user.rideUsers.map(rideUser => (
-                  <Link key={rideUser.id} to={`/rides/${rideUser.rideId}`}> - {rideUser.rideId}</Link>
-                ))
-              }</td>
-            </tr>
-          </tbody>
-        </table>
-        {/* {
+      <div className="SingleUser col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+        <div className="card">
+          <h2>{this.props.match.params.id}</h2>
+          <table className="table">
+            <tbody>
+              <tr>
+                <th scope='row'><strong>uid</strong></th>
+                <td>{user.uid}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>name</strong></th>
+                <td>{user.name}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>phone</strong></th>
+                <td>{user.phone}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>Rides</strong></th>
+                <td>{
+                  user
+                  && user.rideUsers
+                  && user.rideUsers.length > 0
+                  && user.rideUsers.map(rideUser => (
+                    <Link key={rideUser.id} to={`/rides/${rideUser.rideId}`}> - {rideUser.rideId}</Link>
+                  ))
+                }</td>
+              </tr>
+            </tbody>
+          </table>
+          {/* {
           (visitorIsOwner !== '' && visitorIsOwner === true)
             ? <div className='col'>{editButton}</div>
             : ''
         } */}
+        </div>
       </div>
     );
   }

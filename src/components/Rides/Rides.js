@@ -23,7 +23,7 @@ class Rides extends React.Component {
       />
     ));
     return (
-      <div className="Rides col">
+      <div className="Rides">
         <h2>Ride Board</h2>
         <Table striped responsive>
           <thead>

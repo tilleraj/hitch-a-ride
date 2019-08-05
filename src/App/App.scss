@@ -14,6 +14,22 @@ $color3: rgba(159, 160, 195, 1);
 $color4: rgba(139, 104, 127, 1);
 $color5: rgba(123, 67, 91, 1);
 
+
+/* Coolors Exported Palette - coolors.co/9ed1c7-91b5ba-7f809b-664c5d-542d3e */
+
+/* HSL */
+$color1: hsla(168%, 36%, 72%, 1);
+$color2: hsla(187%, 23%, 65%, 1);
+$color3: hsla(238%, 12%, 55%, 1);
+$color4: hsla(321%, 15%, 35%, 1);
+$color5: hsla(334%, 30%, 25%, 1);
+
+/* RGB */
+$color1: rgba(158, 209, 199, 1);
+$color2: rgba(145, 181, 186, 1);
+$color3: rgba(127, 128, 155, 1);
+$color4: rgba(102, 76, 93, 1);
+$color5: rgba(84, 45, 62, 1);
 .App {
   text-align: center;
 }
@@ -46,4 +62,18 @@ $color5: rgba(123, 67, 91, 1);
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-color: rgba(102, 76, 93, 1);
+  // Photo Credit Tom The Photographer https://unsplash.com/@tomthephotographer
+}
+.card {
+  box-shadow: 4px 6px 10px -4px rgba(0, 0, 0, 0.25);
+  background-color:   hsla(60, 80%, 95%, 0.75);
+  padding: 1em;
+}
+
+table {
+  margin-bottom: 0!important;
 }
