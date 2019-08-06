@@ -1,3 +1,7 @@
 .NavBar {
   display: block;
+  margin-bottom: 1em;
+  .bg-dark {
+    background-color: rgba(84, 45, 62, 1)!important;
+  }
 } 

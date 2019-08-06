@@ -184,99 +184,101 @@ class SingleRide extends React.Component {
     const joinButton = <Button color="success" onClick={this.checkExistingRides}>Join Ride</Button>;
     const leaveButton = <Button color="warning" onClick={this.leaveRide}>Leave</Button>;
     return (
-      <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <h2>{this.props.match.params.id}</h2>
-        <table className="table">
-          <tbody>
-            <tr>
-              <th scope='row'><strong>From</strong></th>
-              <td>{ride.origin}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>To</strong></th>
-              <td>{ride.destination}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>Leaving at</strong></th>
-              <td>{ride.departureTime}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>Lyft/Uber?</strong></th>
-              <td>{ride.isLyftUber ? 'Yes' : 'No'}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>Open Seats</strong></th>
-              <td>{ride.totalSeats}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>Organized by</strong></th>
-              <td>{
-                ride.driverId
-                && ride.rideUsers
-                && ride.rideUsers.length > 0
-                && ride.rideUsers.find(rideUser => rideUser.uid === ride.driverId)
-                && ride.rideUsers.find(rideUser => rideUser.uid === ride.driverId).name}</td>
-            </tr>
-            <tr>
-              <th scope='row'><strong>Riders</strong></th>
-              <td>{
-                ride
-                && ride.rideUsers
-                && ride.rideUsers.length > 0
-                && ride.rideUsers.map(rideUser => (
-                  <Link key={rideUser.id} to={`/users/${rideUser.uid}`}> - {rideUser.name}</Link>
-                ))
-              }</td>
-            </tr>
-          </tbody>
-        </table>
-        {visitorIsOwner !== '' && visitorIsOwner === true && <div className='col'>{editButton}{deleteButton}</div>}
-        {visitorIsOwner !== ''
-          && visitorIsOwner === false
-          && ride.rideUsers
-          && ride.rideUsers.length
-          && ride.rideUsers.length > 0
-          && ride.rideUsers.find(rideUser => rideUser.uid === uid)
-          && <div className='col'>{leaveButton}</div>}
-        {visitorIsOwner !== ''
-          && visitorIsOwner === false
-          && ride.rideUsers
-          && ride.rideUsers.length
-          && ride.rideUsers.length > 0
-          && visitorIsOwner !== ''
-          && visitorIsOwner === false
-          && ride.totalSeats > 0
-          && !ride.rideUsers.find(rideUser => rideUser.uid === uid)
-          && <div className='col'>{joinButton}</div>
-        }
-        <div>
-          <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal}>
-            <ModalHeader toggle={this.toggleDeleteModal}>Delete this Ride</ModalHeader>
-            <ModalBody>
-              <p>Are you sure you want to delete this ride?</p>
-              <p>This cannot be undone.</p>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="danger" outline onClick={this.deleteRide} className="mr-4">Yes, I'm sure.</Button>
-              <Button color="secondary" onClick={this.toggleDeleteModal}>Woops, take me back!</Button>
-            </ModalFooter>
-          </Modal>
-        </div>
-        <div>
-          <Modal isOpen={this.state.updateModal} toggle={this.toggleUpdateModal}>
-            <ModalHeader toggle={this.toggleUpdateModal}>Change Ride</ModalHeader>
-            <ModalBody>
-              <p>It looks like you're already in a ride
+      <div className="SingleRide col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+        <div className="card">
+          <h2>{this.props.match.params.id}</h2>
+          <table className="table">
+            <tbody>
+              <tr>
+                <th scope='row'><strong>From</strong></th>
+                <td>{ride.origin}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>To</strong></th>
+                <td>{ride.destination}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>Leaving at</strong></th>
+                <td>{ride.departureTime}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>Lyft/Uber?</strong></th>
+                <td>{ride.isLyftUber ? 'Yes' : 'No'}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>Open Seats</strong></th>
+                <td>{ride.totalSeats}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>Organized by</strong></th>
+                <td>{
+                  ride.driverId
+                  && ride.rideUsers
+                  && ride.rideUsers.length > 0
+                  && ride.rideUsers.find(rideUser => rideUser.uid === ride.driverId)
+                  && ride.rideUsers.find(rideUser => rideUser.uid === ride.driverId).name}</td>
+              </tr>
+              <tr>
+                <th scope='row'><strong>Riders</strong></th>
+                <td>{
+                  ride
+                  && ride.rideUsers
+                  && ride.rideUsers.length > 0
+                  && ride.rideUsers.map(rideUser => (
+                    <Link key={rideUser.id} to={`/users/${rideUser.uid}`}> - {rideUser.name}</Link>
+                  ))
+                }</td>
+              </tr>
+            </tbody>
+          </table>
+          {visitorIsOwner !== '' && visitorIsOwner === true && <div className='col'>{editButton}{deleteButton}</div>}
+          {visitorIsOwner !== ''
+            && visitorIsOwner === false
+            && ride.rideUsers
+            && ride.rideUsers.length
+            && ride.rideUsers.length > 0
+            && ride.rideUsers.find(rideUser => rideUser.uid === uid)
+            && <div className='col'>{leaveButton}</div>}
+          {visitorIsOwner !== ''
+            && visitorIsOwner === false
+            && ride.rideUsers
+            && ride.rideUsers.length
+            && ride.rideUsers.length > 0
+            && visitorIsOwner !== ''
+            && visitorIsOwner === false
+            && ride.totalSeats > 0
+            && !ride.rideUsers.find(rideUser => rideUser.uid === uid)
+            && <div className='col'>{joinButton}</div>
+          }
+          <div>
+            <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal}>
+              <ModalHeader toggle={this.toggleDeleteModal}>Delete this Ride</ModalHeader>
+              <ModalBody>
+                <p>Are you sure you want to delete this ride?</p>
+                <p>This cannot be undone.</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" outline onClick={this.deleteRide} className="mr-4">Yes, I'm sure.</Button>
+                <Button color="secondary" onClick={this.toggleDeleteModal}>Woops, take me back!</Button>
+              </ModalFooter>
+            </Modal>
+          </div>
+          <div>
+            <Modal isOpen={this.state.updateModal} toggle={this.toggleUpdateModal}>
+              <ModalHeader toggle={this.toggleUpdateModal}>Change Ride</ModalHeader>
+              <ModalBody>
+                <p>It looks like you're already in a ride
                 from <strong>{this.state.ride.origin} </strong>
-                to <strong>{this.state.ride.destination}</strong>.</p>
-              <p>Do you want to leave the ride {this.state.oldRideInfo} to join the ride {this.state.newRideInfo}?</p>
-              <p>This cannot be undone.</p>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="warning" outline onClick={this.changeRides} className="mr-4">Yes, I'm sure.</Button>
-              <Button color="secondary" onClick={this.toggleUpdateModal}>Woops, take me back!</Button>
-            </ModalFooter>
-          </Modal>
+                  to <strong>{this.state.ride.destination}</strong>.</p>
+                <p>Do you want to leave the ride {this.state.oldRideInfo} to join the ride {this.state.newRideInfo}?</p>
+                <p>This cannot be undone.</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="warning" outline onClick={this.changeRides} className="mr-4">Yes, I'm sure.</Button>
+                <Button color="secondary" onClick={this.toggleUpdateModal}>Woops, take me back!</Button>
+              </ModalFooter>
+            </Modal>
+          </div>
         </div>
       </div>
     );
