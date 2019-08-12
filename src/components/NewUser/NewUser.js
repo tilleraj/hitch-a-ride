@@ -57,31 +57,33 @@ class NewUser extends React.Component {
     const { newUser } = this.state;
     return (
       <div className="NewUser col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <h1>Create a Profile</h1>
-        <p>Hello and welcome to Hitch a Ride!</p>
-        <p>Please enter the information below to get started.</p>
-        <Form onSubmit={this.formSubmit}>
-          <FormGroup>
-            <Label for="name">Name</Label>
-            <Input
-              id="name"
-              placeholder="First Last"
-              value={newUser.name}
-              onChange={this.nameChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="phone">Phone</Label>
-            <Input
-              id="phone"
-              placeholder="(123) 456-7890"
-              value={newUser.phone}
-              onChange={this.phoneChange}
-            />
-          </FormGroup>
-          <Button type="submit" color="primary">Create User</Button>
-        </Form>
-      </div >
+        <div className="card">
+          <h1>Create a Profile</h1>
+          <p>Hello and welcome to Hitch a Ride!</p>
+          <p>Please enter the information below to get started.</p>
+          <Form onSubmit={this.formSubmit}>
+            <FormGroup>
+              <Label for="name">Name</Label>
+              <Input
+                id="name"
+                placeholder="First Last"
+                value={newUser.name}
+                onChange={this.nameChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="phone">Phone</Label>
+              <Input
+                id="phone"
+                placeholder="(123) 456-7890"
+                value={newUser.phone}
+                onChange={this.phoneChange}
+              />
+            </FormGroup>
+            <Button type="submit" color="primary">Create User</Button>
+          </Form>
+        </div >
+      </div>
     );
   }
 }

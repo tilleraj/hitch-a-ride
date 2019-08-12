@@ -14,9 +14,14 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <div className="Auth">
-        <h1>Auth</h1>
-        <Button color="secondary" onClick={this.loginClickEvent}>Login with Google</Button>
+      <div className="Auth col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+        <div className="card">
+          <h1>Welcome to Hitch a Ride!</h1>
+          <p>Looking to split a Lyft to Hope and Andrew's wedding?</p>
+          <p>Driving yourself and have some extra seats?</p>
+          <p>You're in the right place!</p>
+          <Button color="secondary" onClick={this.loginClickEvent}>Login with Google</Button>
+        </div>
       </div>
     );
   }
