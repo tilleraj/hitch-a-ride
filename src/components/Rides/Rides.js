@@ -28,7 +28,6 @@ class Rides extends React.Component {
         <Table striped responsive>
           <thead>
             <tr>
-              <th scope="col">Ride Id</th>
               <th scope="col">Organizer</th>
               <th scope="col">Lyft/Uber?</th>
               <th scope="col">Origin</th>
