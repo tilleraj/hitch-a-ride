@@ -1,5 +1,7 @@
 import React from 'react';
 // import moment from 'moment';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -15,22 +17,27 @@ class RideRow extends React.Component {
 
   state = {
     numPassengers: 0,
+    userIsPassenger: false,
   }
 
   componentDidMount() {
     rideUsersData.getRideUsersByRideId(this.props.ride.id).then((rideUsersByRideId) => {
+      const { uid } = firebase.auth().currentUser;
+      if (rideUsersByRideId.find(rideUser => rideUser.uid === uid)) {
+        this.setState({ userIsPassenger: true });
+      }
       this.setState({ numPassengers: rideUsersByRideId.length });
     });
   }
 
   render() {
     const { ride } = this.props;
-    const { numPassengers } = this.state;
+    const { numPassengers, userIsPassenger } = this.state;
     // const editLink = `/edit/${ride.id}`;
     const singleLink = `/rides/${ride.id}`;
     return (
-      <tr>
-        <td><Link key={ride.driverId} to={`/users/${ride.driverId}`}>{ride.driverName}</Link></td>
+      <tr className={`${userIsPassenger ? 'passenger' : ''}`}>
+        <td><Link className="driverName" key={ride.driverId} to={`/users/${ride.driverId}`}>{ride.driverName}</Link></td>
         <td>{ride.isLyftUber ? 'Yes' : 'No'}</td>
         <td>{ride.origin}</td>
         <td>{ride.destination}</td>

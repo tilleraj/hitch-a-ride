@@ -184,7 +184,7 @@ class SingleRide extends React.Component {
     const joinButton = <Button color="success" onClick={this.checkExistingRides}>Join Ride</Button>;
     const leaveButton = <Button color="warning" onClick={this.leaveRide}>Leave</Button>;
     return (
-      <div className="SingleRide  col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
+      <div className="SingleRide card col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <h2>{this.props.match.params.id}</h2>
         <table className="table">
           <tbody>
