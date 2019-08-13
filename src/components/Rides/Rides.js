@@ -25,10 +25,10 @@ class Rides extends React.Component {
     return (
       <div className="Rides">
         <h2>Ride Board</h2>
+        <p>Rides you're in are shown in this color: <span className="colorKey">█</span></p>
         <Table striped responsive>
           <thead>
             <tr>
-              <th scope="col">Ride Id</th>
               <th scope="col">Organizer</th>
               <th scope="col">Lyft/Uber?</th>
               <th scope="col">Origin</th>
