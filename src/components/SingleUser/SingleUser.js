@@ -58,17 +58,9 @@ class SingleUser extends React.Component {
     return (
       <div className="SingleUser col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
         <div className="card">
-          <h2>{this.props.match.params.id}</h2>
+          <h2>{user.name}</h2>
           <table className="table">
             <tbody>
-              <tr>
-                <th scope='row'><strong>uid</strong></th>
-                <td>{user.uid}</td>
-              </tr>
-              <tr>
-                <th scope='row'><strong>name</strong></th>
-                <td>{user.name}</td>
-              </tr>
               <tr>
                 <th scope='row'><strong>phone</strong></th>
                 <td>{user.phone}</td>
