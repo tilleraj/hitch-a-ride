@@ -68,55 +68,57 @@ class EditRide extends React.Component {
     const { editRide } = this.state;
     return (
       <div className="EditRide col-12 col-sm-10 offset-sm-1 col-lg-8 offset-lg-2">
-        <h2>Edit Ride</h2>
-        <Form onSubmit={this.formSubmit}>
-          <FormGroup>
-            <Label for="origin">Origin</Label>
-            <Input
-              id="origin"
-              placeholder="ex: Venue, Double Tree, etc."
-              value={editRide.origin}
-              onChange={this.originChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="destination">Destination</Label>
-            <Input
-              id="destination"
-              placeholder="ex: Double Tree, Venue, etc."
-              value={editRide.destination}
-              onChange={this.destinationChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="departureTime">Departure Time</Label>
-            <Input
-              id="departureTime"
-              placeholder="17:15"
-              type="time"
-              value={editRide.departureTime}
-              onChange={this.departureTimeChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <ButtonGroup id="lyftUberButtonGroup">
-              <Button outline color="info" onClick={() => this.lyftUberChange(true)} active={editRide.isLyftUber === true}>Is a Lyft/Uber</Button>
-              <Button outline color="info" onClick={() => this.lyftUberChange(false)} active={editRide.isLyftUber === false}>Not a Lyft/Uber</Button>
-            </ButtonGroup>
-          </FormGroup>
-          <FormGroup>
-            <Label for="totalSeats">Total Seats</Label>
-            <Input
-              id="totalSeats"
-              placeholder="-"
-              type="number"
-              value={editRide.totalSeats}
-              onChange={this.totalSeatsChange}
-            />
-          </FormGroup>
-          <Button type="submit" color="primary" className="mr-4">Submit Changes</Button>
-          <Button type="button" color="warning" onClick={() => this.props.history.push(`/rides/${this.props.match.params.id}`)}>Cancel Changes</Button>
-        </Form>
+        <div className="card">
+          <h2>Edit Ride</h2>
+          <Form onSubmit={this.formSubmit}>
+            <FormGroup>
+              <Label for="origin">Origin</Label>
+              <Input
+                id="origin"
+                placeholder="ex: Venue, Double Tree, etc."
+                value={editRide.origin}
+                onChange={this.originChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="destination">Destination</Label>
+              <Input
+                id="destination"
+                placeholder="ex: Double Tree, Venue, etc."
+                value={editRide.destination}
+                onChange={this.destinationChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="departureTime">Departure Time</Label>
+              <Input
+                id="departureTime"
+                placeholder="17:15"
+                type="time"
+                value={editRide.departureTime}
+                onChange={this.departureTimeChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <ButtonGroup id="lyftUberButtonGroup">
+                <Button outline color="info" onClick={() => this.lyftUberChange(true)} active={editRide.isLyftUber === true}>Is a Lyft/Uber</Button>
+                <Button outline color="info" onClick={() => this.lyftUberChange(false)} active={editRide.isLyftUber === false}>Not a Lyft/Uber</Button>
+              </ButtonGroup>
+            </FormGroup>
+            <FormGroup>
+              <Label for="totalSeats">Total Seats</Label>
+              <Input
+                id="totalSeats"
+                placeholder="-"
+                type="number"
+                value={editRide.totalSeats}
+                onChange={this.totalSeatsChange}
+              />
+            </FormGroup>
+            <Button type="submit" color="primary" className="mr-4">Submit Changes</Button>
+            <Button type="button" color="warning" onClick={() => this.props.history.push(`/rides/${this.props.match.params.id}`)}>Cancel Changes</Button>
+          </Form>
+        </div>
       </div>
     );
   }
