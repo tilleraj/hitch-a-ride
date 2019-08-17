@@ -62,21 +62,6 @@ If a user clicks on a profile link on the home page or in the Single Ride view, 
 
 ![Screenshot of the new ride page](https://raw.githubusercontent.com/tilleraj/hitch-a-ride/master/assets/screenshots/profile.png)
 
-
-
-- Users need to be able to log in and create an account
-- Users need to be able to add information to their profile
-	- Name
-	- Contact info
-	- Where they're staying
-	- Looking for or providing rides
-	- Willing to split a Lyft/Uber?
-- Users will be presented with a list of other attendees which can be sorted/filtered
-- Users need to be able to contact other attendees either through the app or through their provided contact info
-
-Stretch:
-Possibly integrate Lyft/Uber APIs for ride cost estimation and/or ride requesting
-
 # Default Docs
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
