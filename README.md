@@ -1,3 +1,31 @@
+# Hitch a Ride
+Hitch a Ride is an easy to use web app designed to help people carpool to/from my wedding. It was first developed as a Front-End capstone project while studying at Nashville Software School.  
+
+## Introduction
+
+My Fiance and I are planning our wedding and the venue we chose is in a pretty rural area. Lyft and Uber do go out there, but the hotels don't have any shuttles and providing transportation was out of our price range. I wanted to help our guests get to the venue in a way that limited the number of people needing to drive and minimized the cost if they wanted to use a ride-sharing service.
+
+## Logging in
+
+When a user logs in for the first time, they will be asked to input their contact information. Users will then see a list of other guests using the app and are able to browse for rides.
+
+
+
+- Users need to be able to log in and create an account
+- Users need to be able to add information to their profile
+	- Name
+	- Contact info
+	- Where they're staying
+	- Looking for or providing rides
+	- Willing to split a Lyft/Uber?
+- Users will be presented with a list of other attendees which can be sorted/filtered
+- Users need to be able to contact other attendees either through the app or through their provided contact info
+
+Stretch:
+Possibly integrate Lyft/Uber APIs for ride cost estimation and/or ride requesting
+
+# Default Docs
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
